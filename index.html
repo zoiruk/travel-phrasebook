@@ -562,6 +562,59 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .install-btn:active { transform: scale(.97); }
+
+    /* Module Grid/List styles */
+    .modules-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .module-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 16px; cursor: pointer; box-shadow: var(--shadow); text-align: left;
+      display: flex; align-items: center; gap: 16px; width: 100%;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .module-card:hover { border-color: var(--accent); }
+    .module-card:active { transform: scale(.98); }
+    .module-card .ic-wrap {
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+    .module-card .n { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+    .module-card .title { font-size: 16px; font-weight: 800; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .module-card .desc { font-size: 12.5px; color: var(--ink2); line-height: 1.3; font-weight: 500; }
+    .module-card .info-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+    .module-card .badge {
+      font-size: 10px; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-soft-border);
+      font-weight: 700; padding: 2px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .module-card .arrow { color: var(--ink2); opacity: 0.5; font-size: 18px; display: inline-flex; align-items: center; justify-content: center; margin-left: auto; transition: transform 0.2s; }
+    .module-card .arrow svg { transform: rotate(180deg); }
+    .module-card:hover .arrow { transform: translateX(3px); color: var(--accent); opacity: 1; }
+
+    /* Breadcrumbs */
+    .breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink2); font-weight: 600; margin-bottom: 12px; }
+    .breadcrumbs span.link { color: var(--accent); cursor: pointer; transition: color 0.15s; }
+    .breadcrumbs span.link:hover { color: #4338ca; }
+    .breadcrumbs span.sep { opacity: 0.5; }
+
+    /* Profile Styles */
+    .profile-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 20px;
+      padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .profile-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .profile-avatar {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--accent-soft);
+      display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--accent);
+      border: 2px solid var(--accent-soft-border);
+    }
+    .profile-info h3 { margin: 0; font-size: 18px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--ink); }
+    .profile-info p { margin: 2px 0 0; font-size: 13px; color: var(--ink2); }
+    
+    .profile-section-title {
+      font-size: 12px; font-weight: 800; color: var(--accent);
+      margin: 20px 2px 8px; text-transform: uppercase; letter-spacing: 0.06em;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
  
     /* --- Print styles --- */
     @media print {
@@ -594,6 +647,7 @@
     <symbol id="icon-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
     <symbol id="icon-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
     <symbol id="icon-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
   </svg>
 
   <header>
@@ -606,6 +660,7 @@
     <button class="tab" data-tab="book"><span class="ti"><svg class="icon"><use xlink:href="#icon-book"/></svg></span>Темы</button>
     <button class="tab" data-tab="grammar"><span class="ti"><svg class="icon"><use xlink:href="#icon-compass"/></svg></span>Грамматика</button>
     <button class="tab" data-tab="review"><span class="ti"><svg class="icon"><use xlink:href="#icon-repeat"/></svg></span><span>Повторение<span class="badge" id="dueBadge" style="display:none"></span></span></button>
+    <button class="tab" data-tab="profile"><span class="ti"><svg class="icon"><use xlink:href="#icon-user"/></svg></span>Профиль</button>
   </nav>
 
   <!-- Fullscreen overlay (show to stranger) -->
@@ -621,6 +676,70 @@
   <script src="data-grammar.js"></script>
   <script>
     var PB = window.PHRASEBOOK || [];
+    var MODULES = [
+      {
+        id: "communication",
+        icon: "🗣️",
+        bg: "rgba(249, 115, 22, 0.1)",
+        color: "#f97316",
+        title: "Общение",
+        desc: "Приветствия, знакомства, разговоры о себе и семье",
+        cats: ["greetings", "about", "family"]
+      },
+      {
+        id: "travel",
+        icon: "✈️",
+        bg: "rgba(59, 130, 246, 0.1)",
+        color: "#3b82f6",
+        title: "Путешествие",
+        desc: "Погранконтроль, транспорт, городское ориентирование, отель",
+        cats: ["customs", "transport", "directions", "hotel"]
+      },
+      {
+        id: "daily",
+        icon: "🛒",
+        bg: "rgba(16, 185, 129, 0.1)",
+        color: "#10b981",
+        title: "Быт и сервис",
+        desc: "Деньги, ресторан, покупки, интернет, бытовые услуги и почта",
+        cats: ["money", "restaurant", "shopping", "phone", "service", "post"]
+      },
+      {
+        id: "leisure",
+        icon: "🎭",
+        bg: "rgba(139, 92, 246, 0.1)",
+        color: "#8b5cf6",
+        title: "Досуг и учёба",
+        desc: "Развлечения, кино, театры, спорт, хобби и изучение языка",
+        cats: ["entertainment", "education"]
+      },
+      {
+        id: "help",
+        icon: "🚨",
+        bg: "rgba(239, 68, 68, 0.1)",
+        color: "#ef4444",
+        title: "Помощь",
+        desc: "Медицинская помощь, аптеки, чрезвычайные ситуации",
+        cats: ["medical", "problems"]
+      },
+      {
+        id: "reference",
+        icon: "📚",
+        bg: "rgba(107, 114, 128, 0.1)",
+        color: "#6b7280",
+        title: "Справочник",
+        desc: "Меры величин, время, дни и месяцы, сезоны, погода, цвета и числа",
+        cats: ["measures", "time", "months", "weather", "colours", "numbers"]
+      }
+    ];
+
+    function findModuleByCat(catId) {
+      for (var i = 0; i < MODULES.length; i++) {
+        if (MODULES[i].cats.indexOf(catId) >= 0) return MODULES[i];
+      }
+      return null;
+    }
+
     var app = document.getElementById("app");
     var sub = document.getElementById("sub");
     var htitle = document.getElementById("htitle");
@@ -937,15 +1056,180 @@
     var view = "hub", curCat = null;
     function renderHub() {
       view = "hub"; curCat = null; location.hash = "";
-      htitle.textContent = "🇷🇺→🇬🇧 Разговорник"; sub.textContent = "Выберите тему";
+      htitle.textContent = "🇷🇺→🇬🇧 Разговорник"; sub.textContent = "Выберите раздел";
       
-      var h = '<div class="settings-bar">' +
-        '<button class="settings-btn" id="btnSettings">' + svgIcon("settings") + ' Настройки</button>' +
-        '<button class="settings-btn" style="color:var(--sos);" id="btnSos">' + svgIcon("alert") + ' SOS-карты</button>' +
+      var h = '<input class="search" id="q" placeholder="Поиск по-русски или по-английски…" />';
+
+      var potd = getPhraseOfTheDay();
+      if (potd) {
+        h += '<div class="potd" data-say="' + esc(potd.p.en) + '">' +
+          '<div class="potd-label">' + svgIcon("zap") + ' Фраза дня (' + esc(potd.icon) + ' ' + esc(potd.cat) + ')</div>' +
+          '<div class="en">' + esc(potd.p.en) + '</div>' +
+          '<div class="tr">[' + esc(potd.p.transcr) + ']</div>' +
+          '<div class="ru">' + esc(potd.p.ru) + '</div>' +
+          '</div>';
+      }
+
+      h += '<div class="modules-list" id="modulesList">';
+      MODULES.forEach(function (m) {
+        var phraseCount = 0;
+        m.cats.forEach(function (catId) {
+          var c = PB.filter(function (x) { return x.id === catId; })[0];
+          if (c) phraseCount += c.phrases.length;
+        });
+
+        h += '<button class="module-card" data-module="' + m.id + '">' +
+          '<div class="ic-wrap" style="background-color: ' + m.bg + '; color: ' + m.color + ';">' + m.icon + '</div>' +
+          '<div class="n">' +
+            '<div class="title">' + esc(m.title) + '</div>' +
+            '<div class="desc">' + esc(m.desc) + '</div>' +
+            '<div class="info-row">' +
+              '<span class="badge">' + m.cats.length + ' тем</span>' +
+              '<span class="badge" style="background-color: var(--bg); color: var(--ink2); border-color: var(--line);">' + phraseCount + ' фраз</span>' +
+            '</div>' +
+          '</div>' +
+          '<span class="arrow">' + svgIcon("back") + '</span>' +
+          '</button>';
+      });
+      h += '</div><div id="results"></div>';
+      app.innerHTML = h;
+
+      var qInput = document.getElementById("q");
+      if (qInput) {
+        qInput.addEventListener("input", function (e) { renderSearch(e.target.value); });
+      }
+    }
+
+    function renderModule(moduleId) {
+      var m = MODULES.filter(function (x) { return x.id === moduleId; })[0];
+      if (!m) { renderHub(); return; }
+      view = "module"; curCat = moduleId; location.hash = "module-" + moduleId;
+      htitle.textContent = m.icon + " " + m.title;
+      sub.textContent = m.desc;
+
+      var html = '<div class="breadcrumbs">' +
+        '<span class="link" onclick="renderHub()">' + svgIcon("book", "icon-sm") + ' Разговорник</span>' +
+        '<span class="sep">/</span>' +
+        '<span>' + esc(m.title) + '</span>' +
         '</div>';
 
-      h += '<div class="settings-panel" id="settingsPanel">' +
-        '<h3>Настройки и прогресс</h3>' +
+      html += '<button class="back" style="margin-bottom: 16px;">' + svgIcon("back") + ' Ко всем модулям</button>';
+      
+      html += '<div class="cats">';
+      m.cats.forEach(function (catId) {
+        var c = PB.filter(function (x) { return x.id === catId; })[0];
+        if (c) {
+          html += '<button class="cat" data-cat="' + c.id + '"><span class="ic">' + c.icon +
+            '</span><span class="n">' + esc(c.title_ru) +
+            '<div class="cnt">' + c.phrases.length + ' фраз</div></span></button>';
+        }
+      });
+      html += '</div>';
+      app.innerHTML = html;
+    }
+
+    function renderSearch(q) {
+      q = (q || "").trim().toLowerCase();
+      var cats = document.getElementById("modulesList");
+      var res = document.getElementById("results");
+      var potdEl = document.querySelector(".potd");
+      if (!q) {
+        if (cats) cats.style.display = "flex";
+        if (potdEl) potdEl.style.display = "block";
+        res.innerHTML = "";
+        return;
+      }
+      if (cats) cats.style.display = "none";
+      if (potdEl) potdEl.style.display = "none";
+
+      var hits = [];
+      PB.forEach(function (c) { c.phrases.forEach(function (p) {
+        if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
+          hits.push({ p: p, cat: "📚 " + c.title_ru });
+        }
+      }); });
+      if (window.GRAMMAR) {
+        window.GRAMMAR.forEach(function (g) {
+          if (g.examples) {
+            g.examples.forEach(function (p) {
+              if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
+                var exists = hits.some(function (h) { return h.p.en.toLowerCase() === p.en.toLowerCase(); });
+                if (!exists) hits.push({ p: p, cat: "📐 " + g.title_ru });
+              }
+            });
+          }
+        });
+      }
+      res.innerHTML = hits.length ? hits.map(function (h) { return phraseCard(h.p, h.cat); }).join("") : '<div class="empty">Ничего не найдено 🤷</div>';
+    }
+
+    function renderCat(id) {
+      var c = PB.filter(function (x) { return x.id === id; })[0];
+      if (!c) { renderHub(); return; }
+      var mod = findModuleByCat(id);
+      view = "cat"; curCat = id; location.hash = id;
+      htitle.textContent = c.icon + " " + c.title_ru; sub.textContent = c.phrases.length + " фраз · ★ добавить в повтор";
+      
+      var html = '';
+      if (mod) {
+        html += '<div class="breadcrumbs">' +
+          '<span class="link" onclick="renderHub()">' + svgIcon("book", "icon-sm") + ' Разговорник</span>' +
+          '<span class="sep">/</span>' +
+          '<span class="link" onclick="renderModule(\'' + mod.id + '\')">' + esc(mod.title) + '</span>' +
+          '<span class="sep">/</span>' +
+          '<span>' + esc(c.title_ru) + '</span>' +
+          '</div>';
+        html += '<button class="back" data-back-to="module" data-module-id="' + mod.id + '">' + svgIcon("back") + ' К разделу: ' + esc(mod.title) + '</button>';
+      } else {
+        html += '<button class="back">' + svgIcon("back") + ' Все разделы</button>';
+      }
+      
+      c.phrases.forEach(function (p) {
+        if (p.sec) html += '<div class="subhead">' + esc(p.sec) + '</div>';
+        html += phraseCard(p);
+      });
+      app.innerHTML = html;
+    }
+
+    function renderProfile() {
+      view = "profile"; location.hash = "profile";
+      htitle.innerHTML = svgIcon("user") + " Профиль"; sub.textContent = "Ваш прогресс и настройки";
+
+      var stats = getSrsStats();
+      var prog = getGrammarProgress();
+
+      var html = '<div class="profile-card">' +
+        '<div class="profile-header">' +
+          '<div class="profile-avatar">👤</div>' +
+          '<div class="profile-info">' +
+            '<h3>Пользователь</h3>' +
+            '<p>Синхронизация прогресса локально</p>' +
+          '</div>' +
+        '</div>' +
+        '</div>';
+
+      // Statistics Section
+      html += '<div class="profile-section-title">📊 Статистика обучения</div>' +
+        '<div class="stats-card">' +
+          '<div style="font-size:14px; font-weight:700; margin-bottom:12px; text-align:center;">Повторение фраз (SRS)</div>' +
+          '<div class="stats-row">' +
+            '<div class="stats-item"><div class="num">' + stats.total + '</div><div class="lbl">всего карт</div></div>' +
+            '<div class="stats-item"><div class="num">' + stats.boxes[1] + '</div><div class="lbl">коробка 1</div></div>' +
+            '<div class="stats-item"><div class="num">' + (stats.boxes[2] + stats.boxes[3] + stats.boxes[4]) + '</div><div class="lbl">коробки 2-4</div></div>' +
+            '<div class="stats-item"><div class="num">' + stats.boxes[5] + '</div><div class="lbl">выучено (5)</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="g-overall-progress">' +
+          '<div class="g-overall-text">📐 Пройдено уроков грамматики: <b>' + prog.comp + '</b> из <b>' + prog.total + '</b> (' + prog.pct + '%)</div>' +
+          '<div class="g-overall-bar"><div class="g-overall-fill" style="width:' + prog.pct + '%"></div></div>' +
+        '</div>';
+
+      // SOS Section
+      html += '<button class="sos-btn" id="btnSos">' + svgIcon("alert", "icon-lg") + ' Открыть экстренные SOS-карты</button>';
+
+      // Settings Section
+      html += '<div class="profile-section-title">⚙️ Настройки приложения</div>';
+      html += '<div class="settings-panel" style="display:block; margin-bottom:24px;">' +
         (pwaInstallPrompt ? '<div class="settings-row">' +
           '<div>' +
             '<label>📲 Установить приложение</label>' +
@@ -991,88 +1275,21 @@
         '</div>' +
         '</div>';
 
-      h += '<input class="search" id="q" placeholder="Поиск по-русски или по-английски…" />';
-
-      var potd = getPhraseOfTheDay();
-      if (potd) {
-        h += '<div class="potd" data-say="' + esc(potd.p.en) + '">' +
-          '<div class="potd-label">' + svgIcon("zap") + ' Фраза дня (' + esc(potd.icon) + ' ' + esc(potd.cat) + ')</div>' +
-          '<div class="en">' + esc(potd.p.en) + '</div>' +
-          '<div class="tr">[' + esc(potd.p.transcr) + ']</div>' +
-          '<div class="ru">' + esc(potd.p.ru) + '</div>' +
-          '</div>';
-      }
-
-      h += '<div class="cats" id="cats">';
-      PB.forEach(function (c) {
-        h += '<button class="cat" data-cat="' + c.id + '"><span class="ic">' + c.icon +
-          '</span><span class="n">' + esc(c.title_ru) +
-          '<div class="cnt">' + c.phrases.length + ' фраз</div></span></button>';
-      });
-      h += '</div><div id="results"></div>';
-      app.innerHTML = h;
+      app.innerHTML = html;
 
       var themeSel = document.getElementById("themeSelect");
       if (themeSel) themeSel.value = settings.theme || "auto";
 
-      document.getElementById("q").addEventListener("input", function (e) { renderSearch(e.target.value); });
-      document.getElementById("speedRange").addEventListener("input", function (e) {
-        var val = parseFloat(e.target.value);
-        settings.speed = val;
-        saveSettings();
-        var valDisplay = document.getElementById("speedVal");
-        if (valDisplay) valDisplay.textContent = val.toFixed(1);
-      });
-    }
-    function renderSearch(q) {
-      q = (q || "").trim().toLowerCase();
-      var cats = document.getElementById("cats"), res = document.getElementById("results");
-      var potdEl = document.querySelector(".potd");
-      var sBar = document.querySelector(".settings-bar");
-      var sPanel = document.querySelector(".settings-panel");
-      if (!q) {
-        cats.style.display = "grid";
-        if (potdEl) potdEl.style.display = "block";
-        if (sBar) sBar.style.display = "flex";
-        res.innerHTML = "";
-        return;
-      }
-      cats.style.display = "none";
-      if (potdEl) potdEl.style.display = "none";
-      if (sBar) sBar.style.display = "none";
-      if (sPanel) sPanel.style.display = "none";
-
-      var hits = [];
-      PB.forEach(function (c) { c.phrases.forEach(function (p) {
-        if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
-          hits.push({ p: p, cat: "📚 " + c.title_ru });
-        }
-      }); });
-      if (window.GRAMMAR) {
-        window.GRAMMAR.forEach(function (g) {
-          if (g.examples) {
-            g.examples.forEach(function (p) {
-              if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
-                var exists = hits.some(function (h) { return h.p.en.toLowerCase() === p.en.toLowerCase(); });
-                if (!exists) hits.push({ p: p, cat: "📐 " + g.title_ru });
-              }
-            });
-          }
+      var speedRng = document.getElementById("speedRange");
+      if (speedRng) {
+        speedRng.addEventListener("input", function (e) {
+          var val = parseFloat(e.target.value);
+          settings.speed = val;
+          saveSettings();
+          var valDisplay = document.getElementById("speedVal");
+          if (valDisplay) valDisplay.textContent = val.toFixed(1);
         });
       }
-      res.innerHTML = hits.length ? hits.map(function (h) { return phraseCard(h.p, h.cat); }).join("") : '<div class="empty">Ничего не найдено 🤷</div>';
-    }
-    function renderCat(id) {
-      var c = PB.filter(function (x) { return x.id === id; })[0];
-      if (!c) { renderHub(); return; }
-      view = "cat"; curCat = id; location.hash = id;
-      htitle.textContent = c.icon + " " + c.title_ru; sub.textContent = c.phrases.length + " фраз · ★ добавить в повтор";
-      var html = '<button class="back">' + svgIcon("back") + ' Все темы</button>';
-      c.phrases.forEach(function (p) {
-        if (p.sec) html += '<div class="subhead">' + esc(p.sec) + '</div>';
-        html += phraseCard(p);
-      });
-      app.innerHTML = html;
     }
 
     // ---- REVIEW tab ----
@@ -1595,6 +1812,7 @@
       vibrate(10);
       if (t === "review") renderReview();
       else if (t === "grammar") renderGrammar();
+      else if (t === "profile") renderProfile();
       else renderHub();
       window.scrollTo(0, 0);
     }
@@ -1672,13 +1890,16 @@
       // back button behavior
       var back = e.target.closest(".back");
       if (back) {
-        if (back.getAttribute("data-back-to") === "grammar") renderGrammar();
+        var backTo = back.getAttribute("data-back-to");
+        if (backTo === "grammar") renderGrammar();
+        else if (backTo === "module") renderModule(back.getAttribute("data-module-id"));
         else renderHub();
         window.scrollTo(0, 0);
         return;
       }
       
       var cat = e.target.closest("[data-cat]"); if (cat) { renderCat(cat.getAttribute("data-cat")); window.scrollTo(0, 0); return; }
+      var mod = e.target.closest("[data-module]"); if (mod) { renderModule(mod.getAttribute("data-module")); window.scrollTo(0, 0); return; }
       if (e.target.closest("[data-tab]")) { setTab(e.target.closest("[data-tab]").getAttribute("data-tab")); return; }
       
       // grammar-specific events (cross-link tags + lesson list items)
@@ -1741,7 +1962,10 @@
       pwaInstallPrompt = e;
       // If settings panel is visible, re-render to show install button
       var existing = document.getElementById("btnInstallPwa");
-      if (!existing && view === "hub") renderHub();
+      if (!existing) {
+        if (view === "profile") renderProfile();
+        else if (view === "hub") renderHub();
+      }
     });
     function installPwa() {
       if (!pwaInstallPrompt) return;
@@ -1771,13 +1995,22 @@
     var start = location.hash.replace("#", "");
     if (start === "review") { setTab("review"); }
     else if (start === "grammar") { setTab("grammar"); }
+    else if (start === "profile") { setTab("profile"); }
     else if (start.indexOf("grammar-") === 0) {
       setTab("grammar");
       var gId = parseInt(start.replace("grammar-", ""), 10);
       if (gId) renderGrammarLesson(gId);
     }
-    else { document.querySelector('.tab[data-tab="book"]').classList.add("active");
-      if (start && PB.some(function (c) { return c.id === start; })) renderCat(start); else renderHub(); }
+    else if (start.indexOf("module-") === 0) {
+      setTab("book");
+      var mId = start.replace("module-", "");
+      renderModule(mId);
+    }
+    else {
+      var tabBtn = document.querySelector('.tab[data-tab="book"]');
+      if (tabBtn) tabBtn.classList.add("active");
+      if (start && PB.some(function (c) { return c.id === start; })) renderCat(start); else renderHub();
+    }
   </script>
 </body>
 </html>
