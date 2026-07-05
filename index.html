@@ -1,0 +1,1783 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="description" content="Русско-английский разговорник: 636 фраз, 16 уроков грамматики, SRS-повторение, озвучка. Офлайн." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>Разговорник · Русско-английский</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc; --card: #ffffff; --ink: #0f172a; --ink2: #475569;
+      --accent: #4f46e5; --accent-soft: #eff6ff; --accent-soft-border: rgba(79, 70, 229, 0.12); --line: #e2e8f0;
+      --line-trans: rgba(226, 232, 240, 0.7);
+      --gold: #d99a1c; --gold-soft: #fef9ec; --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.02);
+      --sos: #ef4444; --sos-soft: #fef2f2;
+      --header-bg: rgba(248, 250, 252, 0.85); --header-ink: #0f172a; --header-sub: #475569;
+      --tabbar-bg: rgba(255, 255, 255, 0.85);
+    }
+    /* Dark theme */
+    [data-theme="dark"] {
+      --bg: #0f172a; --card: #1e293b; --ink: #f8fafc; --ink2: #94a3b8;
+      --accent: #818cf8; --accent-soft: rgba(79, 70, 229, 0.15); --accent-soft-border: rgba(129, 140, 248, 0.25); --line: #334155;
+      --line-trans: rgba(51, 65, 85, 0.7);
+      --gold: #fbbf24; --gold-soft: #2a2415; --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      --sos: #f87171; --sos-soft: rgba(239, 68, 68, 0.15);
+      --header-bg: rgba(15, 23, 42, 0.85); --header-ink: #f8fafc; --header-sub: #94a3b8;
+      --tabbar-bg: rgba(30, 41, 59, 0.85);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0f172a; --card: #1e293b; --ink: #f8fafc; --ink2: #94a3b8;
+        --accent: #818cf8; --accent-soft: rgba(79, 70, 229, 0.15); --accent-soft-border: rgba(129, 140, 248, 0.25); --line: #334155;
+        --line-trans: rgba(51, 65, 85, 0.7);
+        --gold: #fbbf24; --gold-soft: #2a2415; --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        --sos: #f87171; --sos-soft: rgba(239, 68, 68, 0.15);
+        --header-bg: rgba(15, 23, 42, 0.85); --header-ink: #f8fafc; --header-sub: #94a3b8;
+        --tabbar-bg: rgba(30, 41, 59, 0.85);
+      }
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: 'Inter', -apple-system, system-ui, sans-serif; line-height: 1.4;
+      padding-bottom: calc(76px + env(safe-area-inset-bottom));
+      transition: background-color 0.3s, color 0.3s;
+    }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      color: var(--header-ink);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--line-trans);
+      padding-top: calc(14px + env(safe-area-inset-top));
+      transition: background-color 0.3s;
+    }
+    header .t { font-size: 19px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+    header .s { font-size: 12.5px; color: var(--header-sub); opacity: .85; margin-top: 3px; font-weight: 500; }
+    .wrap { max-width: 620px; margin: 0 auto; padding: 16px 12px 24px; }
+    .search { width: 100%; padding: 12px 16px; border: 1px solid var(--line); border-radius: 14px;
+      font-size: 16px; background: var(--card); color: var(--ink); margin: 8px 0 16px;
+      box-shadow: var(--shadow); transition: border-color 0.2s, box-shadow 0.2s; }
+    .search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12); }
+    .cats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cat {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 16px 14px; cursor: pointer; box-shadow: var(--shadow); text-align: left;
+      display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 700; color: var(--ink);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .cat:hover { border-color: var(--accent); }
+    .cat:active { transform: scale(.97); }
+    .cat .ic { font-size: 24px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; color: var(--accent); }
+    .cat .n { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .cat .cnt { font-size: 11px; color: var(--ink2); font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; }
+    .back { background: none; border: none; color: var(--ink2); font-size: 14px; padding: 8px 0;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px; font-weight: 600;
+      transition: color 0.2s; }
+    .back:hover { color: var(--accent); }
+    .phrase {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow);
+      display: flex; align-items: center; gap: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .phrase:active { transform: scale(.99); }
+    .phrase .body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    .phrase .ru { font-size: 13.5px; color: var(--ink2); font-weight: 500; }
+    .phrase .en { font-size: 17.5px; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .phrase .tr { font-size: 13px; color: var(--accent); font-weight: 500; font-family: 'Inter', sans-serif; }
+    .iconbtn {
+      flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; border: none;
+      font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background-color 0.2s, transform 0.1s, color 0.2s, border-color 0.2s;
+    }
+    .iconbtn:active { transform: scale(.92); }
+    .say { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-soft-border); }
+    .say:active { background: var(--accent); color: #fff; }
+    .star { background: var(--gold-soft); color: #c9c2b0; border: 1px solid rgba(217, 154, 28, 0.15); }
+    .star.on { color: var(--gold); background: var(--gold-soft); border-color: rgba(217, 154, 28, 0.3); }
+    .subhead { font-size: 12px; font-weight: 750; color: var(--accent);
+      margin: 24px 2px 10px; padding-bottom: 6px; border-bottom: 2px solid var(--accent-soft);
+      text-transform: uppercase; letter-spacing: 0.06em; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .subhead:first-of-type { margin-top: 8px; }
+    .empty { text-align: center; color: var(--ink2); padding: 44px 24px; font-size: 15px; }
+    .hint { font-size: 12.5px; color: var(--ink2); text-align: center; margin: 4px 0 14px; }
+    
+    /* Vector icons */
+    .icon {
+      width: 1.25em; height: 1.25em; vertical-align: middle; fill: none;
+      stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+      display: inline-block;
+    }
+    .icon-sm { width: 1em; height: 1em; stroke-width: 2.2; }
+    .icon-lg { width: 1.5em; height: 1.5em; stroke-width: 2; }
+    
+    /* review with card flip animation */
+    .rev-top { text-align: center; margin: 8px 0 16px; font-size: 14px; color: var(--ink2); font-weight: 500; }
+    .flash-card {
+      perspective: 1000px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      min-height: 200px;
+      width: 100%;
+    }
+    .flash-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    .flash-card.flipped .flash-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flash-front, .flash-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      min-height: 200px;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    .flash-back {
+      transform: rotateY(180deg);
+    }
+    .flash-card .ru { font-size: 21px; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .flash-card .en { font-size: 25px; font-weight: 800; color: var(--accent); line-height: 1.3; }
+    .flash-card .tr { font-size: 15px; color: var(--ink2); font-style: italic; }
+    .flash-card .cat { font-size: 10.5px; color: var(--ink2); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; margin-bottom: 4px; }
+    
+    .btnrow { display: flex; gap: 12px; }
+    .bigbtn {
+      flex: 1; padding: 15px; border-radius: 16px; border: none; font-size: 16px; font-weight: 700;
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      transition: transform 0.1s, background-color 0.2s, color 0.2s, box-shadow 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .bigbtn:active { transform: scale(.98); }
+    .b-show { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
+    .b-show:hover { background: #4338ca; }
+    .b-know { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-soft-border); }
+    .b-again { background: #fbe6e2; color: #c0503f; border: 1px solid rgba(192, 80, 63, 0.12); }
+    .b-speak { background: var(--gold-soft); color: var(--gold); flex: 0 0 56px; font-size: 22px; border: 1px solid rgba(217, 154, 28, 0.15); }
+    
+    /* tab bar with glassmorphism */
+    .tabbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; display: flex;
+      background: var(--tabbar-bg);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--line-trans);
+      padding-bottom: env(safe-area-inset-bottom);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.02);
+    }
+    .tab {
+      flex: 1; background: none; border: none; cursor: pointer; padding: 12px 0 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      font-size: 11px; color: var(--ink2); font-weight: 700;
+      transition: color 0.2s, transform 0.1s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .tab:active { transform: scale(0.96); }
+    .tab .ti { font-size: 20px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; }
+    .tab.active { color: var(--accent); }
+    .tab .badge {
+      position: absolute; transform: translate(12px, -6px); background: var(--sos); color: #fff;
+      font-size: 9px; min-width: 16px; height: 16px; border-radius: 8px; padding: 0 4px;
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+      box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+    }
+    
+    /* grammar tab styles */
+    .g-lesson-item {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 18px 16px; cursor: pointer; box-shadow: var(--shadow); margin-bottom: 12px;
+      display: flex; justify-content: space-between; align-items: center; text-align: left;
+      width: 100%; transition: background-color 0.2s, transform 0.15s, border-color 0.2s;
+    }
+    .g-lesson-item:active { transform: scale(0.99); background-color: var(--accent-soft); }
+    .g-lesson-item .info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .g-lesson-item .title { font-size: 16px; font-weight: 750; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .g-lesson-item .subtitle { font-size: 13px; color: var(--ink2); }
+    
+    .g-lesson-view { display: flex; flex-direction: column; gap: 16px; }
+    .g-intro { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; box-shadow: var(--shadow); font-size: 14.5px; line-height: 1.55; }
+    .g-h2 { font-size: 15px; font-weight: 800; color: var(--accent); margin: 24px 2px 10px; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    .g-pronouns-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; box-shadow: var(--shadow);
+    }
+    .g-pronoun-card {
+      background: var(--accent-soft); padding: 10px 12px; border-radius: 12px;
+      display: flex; justify-content: space-between; font-size: 14px;
+      border: 1px solid var(--accent-soft-border);
+    }
+    .g-pronoun-card .en { font-weight: 700; color: var(--accent); }
+    .g-pronoun-card .ru { color: var(--ink); }
+ 
+    /* --- Matrix: desktop table --- */
+    .g-matrix-container { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); margin: 6px 0; }
+    .g-matrix-table { width: 100%; border-collapse: collapse; font-size: 13.5px; text-align: left; }
+    .g-matrix-table th, .g-matrix-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; cursor: pointer; }
+    .g-matrix-table tr:last-child td { border-bottom: none; }
+    .g-matrix-table th { background: var(--accent-soft); color: var(--accent); font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; }
+    .g-matrix-cell { white-space: pre-line; line-height: 1.5; transition: background-color 0.15s; }
+    .g-matrix-cell:active { background: var(--accent-soft); }
+    .g-matrix-cell-header { font-weight: 750; color: var(--ink2); min-width: 90px; }
+    /* color-coded tense columns */
+    .g-matrix-table td:nth-child(2) { border-left: 3px solid #3b82f6; }
+    .g-matrix-table td:nth-child(3) { border-left: 3px solid #10b981; }
+    .g-matrix-table td:nth-child(4) { border-left: 3px solid #f59e0b; }
+    .g-matrix-table th:nth-child(2) { color: #3b82f6; }
+    .g-matrix-table th:nth-child(3) { color: #10b981; }
+    .g-matrix-table th:nth-child(4) { color: #f59e0b; }
+ 
+    /* --- Matrix: mobile cards --- */
+    .g-matrix-cards { display: none; }
+    @media (max-width: 600px) {
+      .g-matrix-container { display: none; }
+      .g-matrix-cards { display: flex; flex-direction: column; gap: 12px; }
+      .g-matrix-card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+        box-shadow: var(--shadow); overflow: hidden;
+      }
+      .g-matrix-card-header {
+        padding: 12px 16px; font-weight: 800; font-size: 14px; color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+      .g-matrix-card-header.past { background: #3b82f6; }
+      .g-matrix-card-header.present { background: #10b981; }
+      .g-matrix-card-header.future { background: #f59e0b; }
+      .g-matrix-card-body { padding: 12px 16px; }
+      .g-matrix-card-row { padding: 8px 0; border-bottom: 1px solid var(--line); }
+      .g-matrix-card-row:last-child { border-bottom: none; }
+      .g-matrix-card-row .type { font-weight: 700; color: var(--ink2); font-size: 12.5px; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .g-matrix-card-row .text { white-space: pre-line; line-height: 1.5; font-size: 14px; cursor: pointer; transition: color 0.15s; }
+      .g-matrix-card-row .text:active { color: var(--accent); }
+    }
+ 
+    /* --- Progress bar --- */
+    .g-progress { display: flex; gap: 6px; align-items: center; margin: 4px 0 12px; }
+    .g-progress-dot {
+      flex: 1; height: 6px; border-radius: 3px; background: var(--line);
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .g-progress-dot.done { background: var(--accent); }
+    .g-progress-dot.active { background: var(--gold); }
+ 
+    /* --- Vocab & markers --- */
+    .g-vocab-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 14px; box-shadow: var(--shadow);
+    }
+    .g-vocab-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 12px; border-radius: 10px; font-size: 14px; cursor: pointer;
+      transition: background-color 0.15s;
+    }
+    .g-vocab-item:active { background: var(--accent-soft); }
+    .g-vocab-item .en { font-weight: 700; color: var(--accent); }
+    .g-vocab-item .ru { color: var(--ink2); }
+    .g-markers-row {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+    }
+    .g-marker {
+      padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 700;
+    }
+    .g-marker.past { background: #dbeafe; color: #1d4ed8; }
+    .g-marker.present { background: #d1fae5; color: #047857; }
+    .g-marker.future { background: #fef3c7; color: #b45309; }
+ 
+    /* --- Drill improvements --- */
+    .g-drill-box {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 14px;
+    }
+    .g-drill-ru { font-size: 17px; font-weight: 700; text-align: center; color: var(--ink); }
+    .g-drill-type { font-size: 11px; color: var(--ink2); text-align: center; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; }
+    .g-slots-zone {
+      min-height: 52px; border-bottom: 2px solid var(--line);
+      margin: 10px 0; padding: 6px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    }
+    .g-chips-zone {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; min-height: 52px; margin-top: 10px;
+    }
+    .g-chip {
+      background: var(--bg); border: 1px solid var(--line); color: var(--ink);
+      padding: 10px 16px; border-radius: 12px; font-weight: 600; cursor: pointer;
+      font-size: 14.5px; transition: transform 0.1s, background-color 0.15s, border-color 0.15s;
+    }
+    .g-chip:active { transform: scale(0.95); }
+    .g-chip.used { opacity: 0.25; pointer-events: none; }
+    .g-chip.active-slot { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+    
+    .g-drill-action { display: flex; justify-content: center; margin-top: 12px; }
+    .g-drill-feedback { text-align: center; font-weight: 750; font-size: 15px; min-height: 22px; }
+    .g-drill-feedback.ok { color: #10b981; }
+    .g-drill-feedback.err { color: #ef4444; }
+    
+    .g-explain {
+      background: var(--gold-soft); border: 1px solid rgba(217, 154, 28, 0.25); border-radius: 12px;
+      padding: 12px 16px; margin-top: 8px; font-size: 13.5px; color: var(--ink);
+      display: none;
+    }
+    .g-explain .correct { color: #10b981; font-weight: 700; }
+    .g-explain .hint { color: var(--ink2); margin-top: 6px; font-style: italic; }
+    
+    /* --- Transform drill --- */
+    .g-transform-source {
+      text-align: center; font-size: 20px; font-weight: 750; color: var(--accent);
+      padding: 12px; background: var(--accent-soft); border-radius: 14px;
+      border: 1px solid var(--accent-soft-border);
+    }
+    .g-transform-task {
+      text-align: center; font-size: 14px; color: var(--ink2); font-weight: 700; margin-top: 4px;
+    }
+    .g-transform-options { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .g-transform-opt {
+      background: var(--bg); border: 1px solid var(--line); padding: 14px 18px;
+      border-radius: 14px; font-size: 15px; cursor: pointer; text-align: left;
+      font-weight: 600; transition: all 0.15s; color: var(--ink);
+    }
+    .g-transform-opt:active { transform: scale(0.98); }
+    .g-transform-opt.correct-pick { background: #d1fae5; border-color: #10b981; color: #047857; font-weight: 750; }
+    .g-transform-opt.wrong-pick { background: #fee2e2; border-color: #ef4444; color: #991b1b; }
+    .g-transform-opt.dim { opacity: 0.45; pointer-events: none; }
+ 
+    .g-comp-badge {
+      background: var(--accent-soft); color: var(--accent); padding: 4px 8px;
+      border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap;
+      border: 1px solid var(--accent-soft-border);
+    }
+    .g-placeholder-badge {
+      background: var(--bg); color: var(--ink2); padding: 4px 8px;
+      border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap;
+      border: 1px solid var(--line);
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .g-drill-box { animation: fadeIn 0.25s ease; }
+    
+    /* Dialog styling in chat format */
+    .g-dialog-box {
+      background: var(--bg); border: 1px solid var(--line); border-radius: 20px;
+      padding: 16px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 12px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .g-dialog-line {
+      padding: 10px 14px; border-radius: 16px; cursor: pointer;
+      display: flex; flex-direction: column; gap: 2px;
+      max-width: 85%; transition: transform 0.15s, background-color 0.15s;
+      line-height: 1.35;
+    }
+    .g-dialog-line:active { transform: scale(0.97); }
+    .g-dialog-line.speaker-A {
+      align-self: flex-start;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-bottom-left-radius: 4px;
+      color: var(--ink);
+    }
+    .g-dialog-line.speaker-B {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+      text-align: right;
+    }
+    .g-dialog-line.speaker-A .ru { font-size: 12.5px; color: var(--ink2); }
+    .g-dialog-line.speaker-B .ru { font-size: 12.5px; color: rgba(255, 255, 255, 0.85); }
+ 
+    /* --- Fullscreen overlay (show to stranger) --- */
+    .fullscreen-overlay {
+      display: none; position: fixed; inset: 0; z-index: 100;
+      background: var(--card); flex-direction: column; align-items: center;
+      justify-content: center; padding: 32px; text-align: center; gap: 20px;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fullscreen-overlay.open { display: flex; }
+    .fullscreen-overlay .fs-en { font-size: clamp(28px, 7vw, 52px); font-weight: 800; color: var(--accent); line-height: 1.3; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+    .fullscreen-overlay .fs-ru { font-size: clamp(16px, 4vw, 24px); color: var(--ink2); margin-top: 8px; font-weight: 500; }
+    .fullscreen-overlay .fs-tr { font-size: clamp(14px, 3.5vw, 20px); color: var(--ink2); font-style: italic; }
+    .fullscreen-overlay .fs-close {
+      position: absolute; top: 16px; right: 16px; width: 44px; height: 44px;
+      border-radius: 50%; border: none; background: var(--bg); font-size: 20px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--ink2); transition: background-color 0.2s;
+    }
+    .fullscreen-overlay .fs-close:active { background-color: var(--accent-soft); }
+    .fullscreen-overlay .fs-speak {
+      margin-top: 16px; padding: 16px 32px; border-radius: 18px; border: none;
+      background: var(--accent); color: #fff; font-size: 18px; font-weight: 750;
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      transition: transform 0.1s, background-color 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .fullscreen-overlay .fs-speak:active { transform: scale(0.97); }
+ 
+    /* --- SOS card --- */
+    .sos-btn {
+      background: var(--sos-soft); border: 1px solid var(--sos); border-radius: 16px;
+      padding: 16px; cursor: pointer; box-shadow: var(--shadow); text-align: center;
+      font-size: 15px; font-weight: 700; color: var(--sos); width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-bottom: 16px; transition: transform 0.1s, background-color 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .sos-btn:active { transform: scale(.98); }
+    .sos-phrase { border-left: 4px solid var(--sos); }
+ 
+    /* --- Phrase of the day --- */
+    .potd {
+      background: linear-gradient(135deg, var(--accent-soft), var(--card));
+      border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+      margin-bottom: 16px; box-shadow: var(--shadow); cursor: pointer;
+      border-left: 4px solid var(--accent);
+    }
+    .potd-label { font-size: 11px; font-weight: 750; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .potd .en { font-size: 20px; font-weight: 800; color: var(--ink); }
+    .potd .ru { font-size: 14px; color: var(--ink2); margin-top: 4px; font-weight: 500; }
+    .potd .tr { font-size: 13.5px; color: var(--accent); font-style: italic; margin-top: 3px; }
+ 
+    /* --- Settings panel --- */
+    .settings-bar {
+      display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 12px;
+    }
+    .settings-btn {
+      background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+      padding: 8px 14px; font-size: 13px; cursor: pointer; color: var(--ink2);
+      display: flex; align-items: center; gap: 6px; font-weight: 650;
+      transition: background-color 0.2s, border-color 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .settings-btn:active { background: var(--accent-soft); }
+    .settings-panel {
+      display: none; background: var(--card); border: 1px solid var(--line);
+      border-radius: 18px; padding: 18px; margin-bottom: 16px; box-shadow: var(--shadow);
+      animation: fadeIn 0.25s ease;
+    }
+    .settings-panel.open { display: block; }
+    .settings-panel h3 { font-size: 16px; margin: 0 0 14px; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 750; }
+    .settings-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--line); gap: 12px;
+    }
+    .settings-row:last-child { border-bottom: none; }
+    .settings-row label { font-size: 14px; color: var(--ink); font-weight: 650; }
+    .settings-row .desc { font-size: 11.5px; color: var(--ink2); margin-top: 2px; }
+ 
+    select.setting-input {
+      width: 110px; margin: 0; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line);
+      background: var(--card); color: var(--ink); font-weight: 600; font-size: 13px; outline: none;
+    }
+    select.setting-input:focus { border-color: var(--accent); }
+    input[type="range"].setting-slider {
+      width: 110px; accent-color: var(--accent); cursor: pointer;
+    }
+ 
+    /* --- Stats mini-card --- */
+    .stats-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .stats-row { display: flex; justify-content: space-around; text-align: center; }
+    .stats-item .num { font-size: 24px; font-weight: 800; color: var(--accent); font-family: 'Plus Jakarta Sans', sans-serif; }
+    .stats-item .lbl { font-size: 11px; color: var(--ink2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 2px; }
+ 
+    /* --- Grammar overall progress --- */
+    .g-overall-progress {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 16px; margin-bottom: 16px; box-shadow: var(--shadow);
+    }
+    .g-overall-bar {
+      height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; margin-top: 10px;
+    }
+    .g-overall-fill {
+      height: 100%; background: var(--accent); border-radius: 4px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .g-overall-text { font-size: 13.5px; color: var(--ink2); font-weight: 500; }
+ 
+    /* --- Speech fallback toast --- */
+    .speech-toast {
+      position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+      padding: 14px 20px; box-shadow: 0 10px 25px rgba(0,0,0,.15); z-index: 50;
+      text-align: center; max-width: 340px; width: 90%;
+      animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .speech-toast .toast-en { font-size: 20px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+    .speech-toast .toast-tr { font-size: 15px; color: var(--ink2); font-style: italic; }
+    .speech-toast .toast-label { font-size: 10.5px; color: var(--ink2); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700; }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+ 
+    /* --- Grammar cross-link tag --- */
+    .grammar-link {
+      display: inline-block; font-size: 11px; font-weight: 700; color: var(--accent);
+      background: var(--accent-soft); padding: 4px 10px; border-radius: 10px;
+      margin-top: 6px; cursor: pointer; text-decoration: none; border: 1px solid var(--accent-soft-border);
+      transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .grammar-link:active { background-color: var(--accent); color: #fff; border-color: var(--accent); }
+ 
+    /* --- PWA install button --- */
+    .install-btn {
+      background: var(--accent); color: #fff; border: none; border-radius: 10px;
+      padding: 8px 16px; font-size: 13px; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: transform 0.1s, background-color 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .install-btn:active { transform: scale(.97); }
+ 
+    /* --- Print styles --- */
+    @media print {
+      header, .tabbar, .search, .back, .iconbtn, .sos-btn, .potd,
+      .settings-bar, .settings-panel, .stats-card, .fullscreen-overlay,
+      .g-drill-box, .g-drill-action, #g-drill-container { display: none !important; }
+      body { padding-bottom: 0; background: #fff; color: #000; }
+      .wrap { max-width: 100%; padding: 0; }
+      .phrase { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; page-break-inside: avoid; }
+      .cats { grid-template-columns: 1fr 1fr 1fr; }
+      .subhead { color: #333; border-color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+  <!-- SVG Icon Sprite for Offline-first PWA -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+    <symbol id="icon-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="icon-say" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="icon-back" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="icon-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+    <symbol id="icon-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></symbol>
+    <symbol id="icon-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></symbol>
+    <symbol id="icon-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  </svg>
+
+  <header>
+    <div class="t" id="htitle">🇷🇺→🇬🇧 Разговорник</div>
+    <div class="s" id="sub">Выберите тему</div>
+  </header>
+  <div class="wrap" id="app"></div>
+
+  <nav class="tabbar">
+    <button class="tab" data-tab="book"><span class="ti"><svg class="icon"><use xlink:href="#icon-book"/></svg></span>Темы</button>
+    <button class="tab" data-tab="grammar"><span class="ti"><svg class="icon"><use xlink:href="#icon-compass"/></svg></span>Грамматика</button>
+    <button class="tab" data-tab="review"><span class="ti"><svg class="icon"><use xlink:href="#icon-repeat"/></svg></span><span>Повторение<span class="badge" id="dueBadge" style="display:none"></span></span></button>
+  </nav>
+
+  <!-- Fullscreen overlay (show to stranger) -->
+  <div class="fullscreen-overlay" id="fsOverlay">
+    <button class="fs-close" id="fsClose"><svg class="icon icon-lg"><use xlink:href="#icon-close"/></svg></button>
+    <div class="fs-en" id="fsEn"></div>
+    <div class="fs-tr" id="fsTr"></div>
+    <div class="fs-ru" id="fsRu"></div>
+    <button class="fs-speak" id="fsSpeak"><svg class="icon"><use xlink:href="#icon-say"/></svg> Озвучить</button>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="data-grammar.js"></script>
+  <script>
+    var PB = window.PHRASEBOOK || [];
+    var app = document.getElementById("app");
+    var sub = document.getElementById("sub");
+    var htitle = document.getElementById("htitle");
+    var dueBadge = document.getElementById("dueBadge");
+
+    // ---- SVG Icon Helper ----
+    function svgIcon(name, cls) {
+      return '<svg class="icon ' + (cls || '') + '" aria-hidden="true"><use xlink:href="#icon-' + name + '"/></svg>';
+    }
+
+    // ---- Haptic Feedback Helper ----
+    function vibrate(ms) {
+      if ("vibrate" in navigator) {
+        try { navigator.vibrate(ms || 15); } catch(e){}
+      }
+    }
+
+    // ---- settings & theme ----
+    var settings = { theme: "auto", speed: 0.9 };
+    function loadSettings() {
+      try {
+        var s = JSON.parse(localStorage.getItem("tp_settings_v1"));
+        if (s) settings = Object.assign({ theme: "auto", speed: 0.9 }, s);
+      } catch (e) {}
+      applyTheme(settings.theme);
+    }
+    function saveSettings() {
+      try {
+        localStorage.setItem("tp_settings_v1", JSON.stringify(settings));
+      } catch (e) {}
+    }
+    function applyTheme(t) {
+      if (t === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else if (t === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+    }
+
+    // ---- export / import / reset ----
+    function exportData() {
+      var keys = ["tp_srs_v1", "tp_settings_v1"];
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key.indexOf("tp_g_comp_") === 0) {
+          keys.push(key);
+        }
+      }
+      var data = {};
+      keys.forEach(function (k) {
+        data[k] = localStorage.getItem(k);
+      });
+      var blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "travel_phrasebook_progress.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+    function importData(file) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          var data = JSON.parse(e.target.result);
+          Object.keys(data).forEach(function (k) {
+            if (k.indexOf("tp_") === 0) {
+              localStorage.setItem(k, data[k]);
+            }
+          });
+          alert("Прогресс успешно импортирован! Страница обновится.");
+          location.reload();
+        } catch (err) {
+          alert("Неверный формат файла резервной копии.");
+        }
+      };
+      reader.readAsText(file);
+    }
+    function resetAllData() {
+      if (confirm("Вы действительно хотите полностью сбросить весь прогресс? Это удалит все звезды, коробки SRS и пройденные уроки грамматики.")) {
+        var keysToRemove = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var key = localStorage.key(i);
+          if (key.indexOf("tp_") === 0) {
+            keysToRemove.push(key);
+          }
+        }
+        keysToRemove.forEach(function (k) {
+          localStorage.removeItem(k);
+        });
+        alert("Прогресс сброшен.");
+        location.reload();
+      }
+    }
+
+    // ---- storage / SRS (Leitner) ----
+    var SRS_KEY = "tp_srs_v1";
+    var INTERVALS = { 1: 1, 2: 2, 3: 4, 4: 7, 5: 14 };
+    function today() { return Math.floor(Date.now() / 86400000); }
+    function loadSrs() { try { return JSON.parse(localStorage.getItem(SRS_KEY)) || {}; } catch (e) { return {}; } }
+    function saveSrs(s) { try { localStorage.setItem(SRS_KEY, JSON.stringify(s)); } catch (e) {} }
+    var srs = loadSrs();
+    
+    // index every phrase by its English text (unique key)
+    var byEn = {};
+    PB.forEach(function (c) { c.phrases.forEach(function (p) { byEn[p.en] = { p: p, cat: c.title_ru }; }); });
+    if (window.GRAMMAR) {
+      window.GRAMMAR.forEach(function (g) {
+        if (g.examples) {
+          g.examples.forEach(function (p) {
+            byEn[p.en] = { p: p, cat: g.title_ru };
+          });
+        }
+      });
+    }
+
+    function isStarred(en) { return !!srs[en]; }
+    function toggleStar(en) {
+      if (srs[en]) delete srs[en];
+      else srs[en] = { box: 1, due: today() };
+      saveSrs(srs); refreshBadge();
+      vibrate(15);
+    }
+    function grade(en, know) {
+      var e = srs[en]; if (!e) return;
+      if (know) {
+        e.box = Math.min(5, (e.box || 1) + 1); e.due = today() + INTERVALS[e.box];
+        vibrate(15);
+      } else {
+        e.box = 1; e.due = today() + 1;
+        vibrate([30, 40]);
+      }
+      saveSrs(srs); refreshBadge();
+    }
+    function dueList() {
+      var t = today(), out = [];
+      Object.keys(srs).forEach(function (en) { if (byEn[en] && srs[en].due <= t) out.push(en); });
+      return out;
+    }
+    function refreshBadge() {
+      var n = dueList().length;
+      if (n > 0) { dueBadge.textContent = n; dueBadge.style.display = "inline-flex"; }
+      else dueBadge.style.display = "none";
+    }
+
+    function speak(text) {
+      if (!("speechSynthesis" in window)) {
+        showSpeechToast(text);
+        return;
+      }
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "en-GB"; u.rate = settings.speed || 0.9;
+      u.onerror = function () { showSpeechToast(text); };
+      window.speechSynthesis.speak(u);
+      // Detect silent failure (Android quirk)
+      setTimeout(function () {
+        if (window.speechSynthesis.speaking === false && window.speechSynthesis.pending === false) {
+          // Might have silently failed, show toast as backup
+        }
+      }, 500);
+    }
+    var speechToastTimer = null;
+    function showSpeechToast(text) {
+      var existing = document.getElementById("speechToast");
+      if (existing) existing.remove();
+      // Try to find transcription from data
+      var tr = "";
+      var rec = byEn[text];
+      if (rec && rec.p && rec.p.transcr) tr = rec.p.transcr;
+      var toast = document.createElement("div");
+      toast.id = "speechToast";
+      toast.className = "speech-toast";
+      toast.innerHTML = '<div class="toast-label">🔇 Озвучка недоступна</div>' +
+        '<div class="toast-en">' + esc(text) + '</div>' +
+        (tr ? '<div class="toast-tr">[' + esc(tr) + ']</div>' : '');
+      document.body.appendChild(toast);
+      clearTimeout(speechToastTimer);
+      speechToastTimer = setTimeout(function () {
+        var el = document.getElementById("speechToast");
+        if (el) el.remove();
+      }, 4000);
+      toast.addEventListener("click", function () {
+        clearTimeout(speechToastTimer);
+        toast.remove();
+      });
+    }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+    // Cross-linking: find grammar lessons relevant to a phrase
+    function findGrammarLinks(enText) {
+      if (!window.GRAMMAR) return [];
+      var links = [];
+      var lower = enText.toLowerCase();
+      window.GRAMMAR.forEach(function (g) {
+        if (g.isPlaceholder) return;
+        // Check if any grammar example matches this phrase
+        if (g.examples) {
+          var found = g.examples.some(function (ex) {
+            return ex.en.toLowerCase() === lower;
+          });
+          if (found) { links.push({ id: g.id, title: g.title_ru }); return; }
+        }
+        // Check grammar keywords
+        if (g.vocab) {
+          g.vocab.forEach(function (v) {
+            if (lower.indexOf(v.en.toLowerCase()) >= 0 && !links.some(function (l) { return l.id === g.id; })) {
+              links.push({ id: g.id, title: g.title_ru });
+            }
+          });
+        }
+      });
+      return links.slice(0, 2); // Max 2 links
+    }
+
+    function phraseCard(p, cat) {
+      var on = isStarred(p.en) ? " on" : "";
+      var catHtml = '';
+      if (cat) {
+        var prefix = '';
+        var title = cat;
+        if (cat.indexOf("📚 ") === 0) {
+          prefix = svgIcon("book", "icon-sm") + ' ';
+          title = cat.substring(2);
+        } else if (cat.indexOf("📐 ") === 0) {
+          prefix = svgIcon("compass", "icon-sm") + ' ';
+          title = cat.substring(2);
+        }
+        catHtml = '<div style="font-size:11px; color:var(--ink2); margin-bottom:4px; font-weight:600; display:flex; align-items:center; gap:4px;">' + prefix + esc(title) + '</div>';
+      }
+      var grammarLinks = findGrammarLinks(p.en);
+      var linkHtml = '';
+      if (grammarLinks.length) {
+        grammarLinks.forEach(function (gl) {
+          linkHtml += '<span class="grammar-link" data-grammar-id="' + gl.id + '" title="Перейти к уроку">' + svgIcon("compass", "icon-sm") + ' ' + esc(gl.title.replace(/^Урок \d+: /, '')) + '</span> ';
+        });
+      }
+      return '<div class="phrase"><div class="body">' +
+        catHtml +
+        '<div class="ru">' + esc(p.ru) + '</div>' +
+        '<div class="en" style="cursor:pointer;" title="Показать крупно">' + esc(p.en) + '</div>' +
+        '<div class="tr">[' + esc(p.transcr) + ']</div>' +
+        linkHtml +
+        '</div>' +
+        '<button class="iconbtn star' + on + '" data-star="' + esc(p.en) + '" aria-label="В повторение">' + svgIcon("star") + '</button>' +
+        '<button class="iconbtn say" data-say="' + esc(p.en) + '" aria-label="Озвучить">' + svgIcon("say") + '</button></div>';
+    }
+
+    // ---- SOS emergency cards ----
+    var SOS_PHRASES = [
+      { ru: "Помогите, пожалуйста!", en: "Help, please!", transcr: "хэлп плиз" },
+      { ru: "Мне плохо. Вызовите врача.", en: "I feel ill. Call a doctor, please.", transcr: "ай фил ил. кол э доктэ плиз" },
+      { ru: "Где находится больница?", en: "Where is the hospital?", transcr: "уэа из зэ хоспитл" },
+      { ru: "Я потерял свой паспорт.", en: "I lost my passport.", transcr: "ай lost май паспот" },
+      { ru: "Меня обокрали.", en: "I've been robbed.", transcr: "айв бин робд" },
+      { ru: "Где ближайший полицейский участок?", en: "Where is the nearest police station?", transcr: "уэа из зэ ниарист пэлис стэйшн" },
+      { ru: "Я заблудился. Помогите мне добраться до отеля.", en: "I'm lost. Help me get to my hotel, please.", transcr: "айм лост. хэлп ми гет ту май хоутэл плиз" },
+      { ru: "Вызовите полицию!", en: "Call the police!", transcr: "кол зэ пэлис" },
+      { ru: "Пожар!", en: "Fire!", transcr: "файэ" },
+      { ru: "Отойдите от меня!", en: "Go away!", transcr: "гоу эуэй" },
+      { ru: "Где здесь туалет?", en: "Where is the toilet?", transcr: "уэа из зэ тойлит" },
+      { ru: "Мне нужен переводчик.", en: "I need an interpreter.", transcr: "ай нид эн интёпритэ" },
+      { ru: "Позвоните в российское посольство.", en: "Call the Russian Embassy, please.", transcr: "кол зэ рашн эмбэси плиз" }
+    ];
+    function renderSos() {
+      view = "sos"; curCat = "sos"; location.hash = "sos";
+      htitle.innerHTML = svgIcon("alert", "icon-lg") + " Экстренная помощь (SOS)";
+      sub.textContent = "Покажите эти фразы в случае опасности";
+      var html = '<button class="back">' + svgIcon("back") + ' Все темы</button>';
+      SOS_PHRASES.forEach(function (p) {
+        var on = isStarred(p.en) ? " on" : "";
+        html += '<div class="phrase sos-phrase"><div class="body">' +
+          '<div class="ru" style="color:var(--sos); font-weight:700;">' + esc(p.ru) + '</div>' +
+          '<div class="en" style="cursor:pointer;" title="Показать крупно">' + esc(p.en) + '</div>' +
+          '<div class="tr">[' + esc(p.transcr) + ']</div></div>' +
+          '<button class="iconbtn star' + on + '" data-star="' + esc(p.en) + '" aria-label="В повторение">' + svgIcon("star") + '</button>' +
+          '<button class="iconbtn say" data-say="' + esc(p.en) + '" aria-label="Озвучить">' + svgIcon("say") + '</button></div>';
+      });
+      app.innerHTML = html;
+    }
+
+    // ---- phrase of the day ----
+    function getPhraseOfTheDay() {
+      var all = [];
+      PB.forEach(function (c) {
+        c.phrases.forEach(function (p) { all.push({ p: p, cat: c.title_ru, icon: c.icon }); });
+      });
+      if (!all.length) return null;
+      var d = new Date();
+      var seed = d.getFullYear() * 367 + (d.getMonth() + 1) * 31 + d.getDate();
+      var idx = seed % all.length;
+      return all[idx];
+    }
+
+    // ---- fullscreen stranger mode ----
+    var fsActiveText = "";
+    function showFullscreen(en, tr, ru) {
+      fsActiveText = en;
+      document.getElementById("fsEn").textContent = en;
+      document.getElementById("fsTr").textContent = "[" + tr + "]";
+      document.getElementById("fsRu").textContent = ru;
+      document.getElementById("fsOverlay").classList.add("open");
+    }
+    function closeFullscreen() {
+      document.getElementById("fsOverlay").classList.remove("open");
+    }
+
+    // ---- BOOK tab ----
+    var view = "hub", curCat = null;
+    function renderHub() {
+      view = "hub"; curCat = null; location.hash = "";
+      htitle.textContent = "🇷🇺→🇬🇧 Разговорник"; sub.textContent = "Выберите тему";
+      
+      var h = '<div class="settings-bar">' +
+        '<button class="settings-btn" id="btnSettings">' + svgIcon("settings") + ' Настройки</button>' +
+        '<button class="settings-btn" style="color:var(--sos);" id="btnSos">' + svgIcon("alert") + ' SOS-карты</button>' +
+        '</div>';
+
+      h += '<div class="settings-panel" id="settingsPanel">' +
+        '<h3>Настройки и прогресс</h3>' +
+        (pwaInstallPrompt ? '<div class="settings-row">' +
+          '<div>' +
+            '<label>📲 Установить приложение</label>' +
+            '<div class="desc" style="font-size:11px; color:var(--ink2);">Работает офлайн, как родное приложение</div>' +
+          '</div>' +
+          '<button class="install-btn" id="btnInstallPwa">' + svgIcon("plus") + ' Установить</button>' +
+        '</div>' : '') +
+        '<div class="settings-row">' +
+          '<label>Тёмная тема</label>' +
+          '<select id="themeSelect" class="setting-input">' +
+            '<option value="auto">Авто</option>' +
+            '<option value="light">Светлая</option>' +
+            '<option value="dark">Тёмная</option>' +
+          '</select>' +
+        '</div>' +
+        '<div class="settings-row">' +
+          '<div>' +
+            '<label>Скорость озвучки</label>' +
+            '<div class="desc" style="font-size:11px; color:var(--ink2);">Быстрее или медленнее</div>' +
+          '</div>' +
+          '<div style="display:flex; align-items:center; gap:8px;">' +
+            '<input type="range" id="speedRange" class="setting-slider" min="0.6" max="1.3" step="0.1" value="' + (settings.speed || 0.9) + '" />' +
+            '<span id="speedVal" style="font-size:12px; font-weight:700; width:24px; text-align:right;">' + (settings.speed || 0.9) + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="settings-row">' +
+          '<div>' +
+            '<label>Резервная копия</label>' +
+            '<div class="desc" style="font-size:11px; color:var(--ink2);">Сохраните прогресс на другое устройство</div>' +
+          '</div>' +
+          '<div style="display:flex; gap:6px;">' +
+            '<button class="settings-btn" id="btnExport">' + svgIcon("download") + ' Экспорт</button>' +
+            '<button class="settings-btn" id="btnImport">' + svgIcon("upload") + ' Импорт</button>' +
+            '<input type="file" id="importFile" style="display:none" accept=".json" />' +
+          '</div>' +
+        '</div>' +
+        '<div class="settings-row">' +
+          '<div>' +
+            '<label style="color:var(--sos); font-weight:600;">Сбросить прогресс</label>' +
+            '<div class="desc" style="font-size:11px; color:var(--ink2);">Стереть все звезды, SRS коробки и уроки</div>' +
+          '</div>' +
+          '<button class="settings-btn" style="background:var(--sos-soft); color:var(--sos); border-color:var(--sos);" id="btnResetAll">' + svgIcon("trash") + ' Сброс</button>' +
+        '</div>' +
+        '</div>';
+
+      h += '<input class="search" id="q" placeholder="Поиск по-русски или по-английски…" />';
+
+      var potd = getPhraseOfTheDay();
+      if (potd) {
+        h += '<div class="potd" data-say="' + esc(potd.p.en) + '">' +
+          '<div class="potd-label">' + svgIcon("zap") + ' Фраза дня (' + esc(potd.icon) + ' ' + esc(potd.cat) + ')</div>' +
+          '<div class="en">' + esc(potd.p.en) + '</div>' +
+          '<div class="tr">[' + esc(potd.p.transcr) + ']</div>' +
+          '<div class="ru">' + esc(potd.p.ru) + '</div>' +
+          '</div>';
+      }
+
+      h += '<div class="cats" id="cats">';
+      PB.forEach(function (c) {
+        h += '<button class="cat" data-cat="' + c.id + '"><span class="ic">' + c.icon +
+          '</span><span class="n">' + esc(c.title_ru) +
+          '<div class="cnt">' + c.phrases.length + ' фраз</div></span></button>';
+      });
+      h += '</div><div id="results"></div>';
+      app.innerHTML = h;
+
+      var themeSel = document.getElementById("themeSelect");
+      if (themeSel) themeSel.value = settings.theme || "auto";
+
+      document.getElementById("q").addEventListener("input", function (e) { renderSearch(e.target.value); });
+      document.getElementById("speedRange").addEventListener("input", function (e) {
+        var val = parseFloat(e.target.value);
+        settings.speed = val;
+        saveSettings();
+        var valDisplay = document.getElementById("speedVal");
+        if (valDisplay) valDisplay.textContent = val.toFixed(1);
+      });
+    }
+    function renderSearch(q) {
+      q = (q || "").trim().toLowerCase();
+      var cats = document.getElementById("cats"), res = document.getElementById("results");
+      var potdEl = document.querySelector(".potd");
+      var sBar = document.querySelector(".settings-bar");
+      var sPanel = document.querySelector(".settings-panel");
+      if (!q) {
+        cats.style.display = "grid";
+        if (potdEl) potdEl.style.display = "block";
+        if (sBar) sBar.style.display = "flex";
+        res.innerHTML = "";
+        return;
+      }
+      cats.style.display = "none";
+      if (potdEl) potdEl.style.display = "none";
+      if (sBar) sBar.style.display = "none";
+      if (sPanel) sPanel.style.display = "none";
+
+      var hits = [];
+      PB.forEach(function (c) { c.phrases.forEach(function (p) {
+        if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
+          hits.push({ p: p, cat: "📚 " + c.title_ru });
+        }
+      }); });
+      if (window.GRAMMAR) {
+        window.GRAMMAR.forEach(function (g) {
+          if (g.examples) {
+            g.examples.forEach(function (p) {
+              if (p.ru.toLowerCase().indexOf(q) >= 0 || p.en.toLowerCase().indexOf(q) >= 0) {
+                var exists = hits.some(function (h) { return h.p.en.toLowerCase() === p.en.toLowerCase(); });
+                if (!exists) hits.push({ p: p, cat: "📐 " + g.title_ru });
+              }
+            });
+          }
+        });
+      }
+      res.innerHTML = hits.length ? hits.map(function (h) { return phraseCard(h.p, h.cat); }).join("") : '<div class="empty">Ничего не найдено 🤷</div>';
+    }
+    function renderCat(id) {
+      var c = PB.filter(function (x) { return x.id === id; })[0];
+      if (!c) { renderHub(); return; }
+      view = "cat"; curCat = id; location.hash = id;
+      htitle.textContent = c.icon + " " + c.title_ru; sub.textContent = c.phrases.length + " фраз · ★ добавить в повтор";
+      var html = '<button class="back">' + svgIcon("back") + ' Все темы</button>';
+      c.phrases.forEach(function (p) {
+        if (p.sec) html += '<div class="subhead">' + esc(p.sec) + '</div>';
+        html += phraseCard(p);
+      });
+      app.innerHTML = html;
+    }
+
+    // ---- REVIEW tab ----
+    var deck = [], deckPos = 0, revealed = false;
+    function getSrsStats() {
+      var total = Object.keys(srs).length;
+      var boxes = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+      Object.keys(srs).forEach(function (en) {
+        var b = srs[en].box || 1;
+        boxes[b] = (boxes[b] || 0) + 1;
+      });
+      return { total: total, boxes: boxes };
+    }
+    function renderReview() {
+      view = "review"; location.hash = "review";
+      htitle.innerHTML = svgIcon("repeat") + " Повторение"; sub.textContent = "Карточки на сегодня";
+      deck = dueList(); deckPos = 0; revealed = false;
+      if (!Object.keys(srs).length) {
+        app.innerHTML = '<div class="empty">Пока нет карточек.<br><br>Откройте любую тему и нажмите ★ на фразе — она попадёт сюда на повторение.</div>';
+        return;
+      }
+      var stats = getSrsStats();
+      var statsHtml = '<div class="stats-card">' +
+        '<div style="font-size:14px; font-weight:700; margin-bottom:8px; text-align:center;">📊 Прогресс запоминания фраз</div>' +
+        '<div class="stats-row">' +
+          '<div class="stats-item"><div class="num">' + stats.total + '</div><div class="lbl">всего карт</div></div>' +
+          '<div class="stats-item"><div class="num">' + stats.boxes[1] + '</div><div class="lbl">коробка 1</div></div>' +
+          '<div class="stats-item"><div class="num">' + (stats.boxes[2] + stats.boxes[3] + stats.boxes[4]) + '</div><div class="lbl">коробки 2-4</div></div>' +
+          '<div class="stats-item"><div class="num">' + stats.boxes[5] + '</div><div class="lbl">коробка 5 (выучено)</div></div>' +
+        '</div>' +
+        '</div>';
+      if (!deck.length) {
+        app.innerHTML = statsHtml + '<div class="empty">🎉 На сегодня всё повторено!<br><br>Всего карточек: ' + Object.keys(srs).length + '. Возвращайтесь завтра.</div>';
+        return;
+      }
+      drawCard(statsHtml);
+    }
+    function drawCard(statsHtml) {
+      if (deckPos >= deck.length) { renderReview(); return; }
+      var en = deck[deckPos], rec = byEn[en]; if (!rec) { deckPos++; return drawCard(statsHtml); }
+      var p = rec.p; revealed = false;
+      var h = statsHtml || "";
+      h += '<div class="rev-top">Карточка ' + (deckPos + 1) + ' из ' + deck.length + '</div>';
+      h += '<div class="flash-card" id="flashCard" onclick="if(!revealed) reveal();">' +
+             '<div class="flash-card-inner">' +
+               '<div class="flash-front">' +
+                 '<div class="cat">' + esc(rec.cat) + '</div>' +
+                 '<div class="ru">' + esc(p.ru) + '</div>' +
+                 '<div style="font-size:12px; color:var(--ink2); margin-top:12px; font-weight:600;">Нажмите для ответа</div>' +
+               '</div>' +
+               '<div class="flash-back">' +
+                 '<div class="cat">' + esc(rec.cat) + '</div>' +
+                 '<div class="en">' + esc(p.en) + '</div>' +
+                 '<div class="tr">[' + esc(p.transcr) + ']</div>' +
+               '</div>' +
+             '</div>' +
+           '</div>';
+      h += '<div class="btnrow" id="revbtns">' +
+           '<button class="bigbtn b-show" id="showBtn">Показать ответ</button></div>';
+      app.innerHTML = h;
+    }
+    function reveal() {
+      if (revealed) return;
+      revealed = true;
+      var card = document.getElementById("flashCard");
+      if (card) card.classList.add("flipped");
+      var en = deck[deckPos];
+      document.getElementById("revbtns").innerHTML =
+        '<button class="bigbtn b-speak" data-say="' + esc(en) + '">' + svgIcon("say") + '</button>' +
+        '<button class="bigbtn b-again" id="againBtn">Повторить</button>' +
+        '<button class="bigbtn b-know" id="knowBtn">Знаю</button>';
+      speak(en);
+    }
+    function nextCard(know) { grade(deck[deckPos], know); deckPos++; drawCard(); }
+
+    // ---- GRAMMAR tab ----
+    var curGrammarLesson = null;
+    var currentDrills = [];
+    var currentDrillPos = 0;
+    var currentAnswer = [];
+    var drillChecked = false;
+    var currentDrillErrors = 0;
+
+    function isGrammarCompleted(id) {
+      return localStorage.getItem("tp_g_comp_" + id) === "true";
+    }
+    function setGrammarCompleted(id, val) {
+      localStorage.setItem("tp_g_comp_" + id, val ? "true" : "false");
+    }
+    function getGrammarProgress() {
+      if (!window.GRAMMAR || !window.GRAMMAR.length) return { comp: 0, total: 0, pct: 0 };
+      var comp = 0;
+      window.GRAMMAR.forEach(function (g) { if (!g.isPlaceholder && isGrammarCompleted(g.id)) comp++; });
+      var total = window.GRAMMAR.filter(function (g) { return !g.isPlaceholder; }).length;
+      return { comp: comp, total: total, pct: total ? Math.round((comp / total) * 100) : 0 };
+    }
+    
+    function renderGrammar() {
+      view = "grammar"; location.hash = "grammar";
+      htitle.innerHTML = svgIcon("compass") + " Грамматика"; sub.textContent = "16 уроков по методу Петрова";
+      
+      var html = '';
+      if (!window.GRAMMAR || !window.GRAMMAR.length) {
+        html += '<div class="empty">Данные грамматики не найдены 🤷</div>';
+      } else {
+        // Overall progress bar
+        var prog = getGrammarProgress();
+        html += '<div class="g-overall-progress">' +
+          '<div class="g-overall-text">📊 Пройдено уроков: <b>' + prog.comp + '</b> из <b>' + prog.total + '</b> (' + prog.pct + '%)</div>' +
+          '<div class="g-overall-bar"><div class="g-overall-fill" style="width:' + prog.pct + '%"></div></div>' +
+          '</div>';
+
+        html += '<div class="g-lessons-list">';
+        window.GRAMMAR.forEach(function (g) {
+          var badge = '';
+          if (g.isPlaceholder) {
+            badge = '<span class="g-placeholder-badge">В разработке</span>';
+          } else if (isGrammarCompleted(g.id)) {
+            badge = '<span class="g-comp-badge">' + svgIcon("check", "icon-sm") + ' Пройдено</span>';
+          }
+          html += '<button class="g-lesson-item" data-grammar-id="' + g.id + '">' +
+            '<div class="info">' +
+              '<div class="title">' + esc(g.title_ru) + '</div>' +
+              '<div class="subtitle">' + esc(g.subtitle) + '</div>' +
+            '</div>' +
+            badge +
+            '</button>';
+        });
+        html += '</div>';
+      }
+      app.innerHTML = html;
+    }
+
+    function renderGrammarLesson(id) {
+      var g = (window.GRAMMAR || []).filter(function (x) { return x.id === id; })[0];
+      if (!g) { renderGrammar(); return; }
+      view = "grammar-lesson"; curGrammarLesson = id; location.hash = "grammar-" + id;
+      htitle.textContent = g.title_ru; sub.textContent = g.subtitle;
+      
+      var html = '<button class="back" data-back-to="grammar">' + svgIcon("back") + ' Все уроки</button>';
+      
+      if (g.isPlaceholder) {
+        html += '<div class="empty"><h3>🚧 Урок в разработке</h3>Этот раздел будет добавлен в следующем обновлении.<br><br>Пожалуйста, пройдите Урок 1 и Урок 2, чтобы освоить базовые матрицы глаголов!</div>';
+        app.innerHTML = html;
+        return;
+      }
+      
+      // 1. Introduction
+      html += '<div class="g-intro">' + g.intro_ru + '</div>';
+      
+      // 2. Pronouns
+      if (g.pronouns && g.pronouns.length) {
+        html += '<div class="g-h2">Местоимения</div>';
+        html += '<div class="g-pronouns-grid">';
+        g.pronouns.forEach(function (p) {
+          html += '<div class="g-pronoun-card"><span class="en">' + esc(p.en) + '</span><span class="ru">' + esc(p.ru) + '</span></div>';
+        });
+        html += '</div>';
+      }
+      
+      // 3. Visual Matrix (desktop table + mobile cards)
+      if (g.matrix) {
+        html += '<div class="g-h2">Таблица-матрица</div>';
+        // Desktop table
+        html += '<div class="g-matrix-container"><table class="g-matrix-table">';
+        html += '<thead><tr><th>Форма</th>';
+        g.matrix.headers.forEach(function (h) {
+          html += '<th>' + esc(h) + '</th>';
+        });
+        html += '</tr></thead><tbody>';
+        g.matrix.rows.forEach(function (row) {
+          html += '<tr>';
+          html += '<td class="g-matrix-cell-header">' + esc(row.type) + '</td>';
+          html += '<td class="g-matrix-cell" data-say="' + esc(row.past.replace(/\n/g, '. ')) + '">' + esc(row.past) + '</td>';
+          html += '<td class="g-matrix-cell" data-say="' + esc(row.present.replace(/\n/g, '. ')) + '">' + esc(row.present) + '</td>';
+          html += '<td class="g-matrix-cell" data-say="' + esc(row.future.replace(/\n/g, '. ')) + '">' + esc(row.future) + '</td>';
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        // Mobile cards
+        var tenseKeys = ['past', 'present', 'future'];
+        var tenseLabels = g.matrix.headers;
+        html += '<div class="g-matrix-cards">';
+        for (var ti = 0; ti < 3; ti++) {
+          var tKey = tenseKeys[ti];
+          html += '<div class="g-matrix-card"><div class="g-matrix-card-header ' + tKey + '">' + esc(tenseLabels[ti]) + '</div><div class="g-matrix-card-body">';
+          g.matrix.rows.forEach(function (row) {
+            html += '<div class="g-matrix-card-row"><div class="type">' + esc(row.type) + '</div><div class="text" data-say="' + esc(row[tKey].replace(/\n/g, '. ')) + '">' + esc(row[tKey]) + '</div></div>';
+          });
+          html += '</div></div>';
+        }
+        html += '</div>';
+      }
+      
+      // 4. Time markers
+      if (g.markers) {
+        html += '<div class="g-h2">Слова-маркеры времени</div>';
+        html += '<div class="g-markers-row">';
+        if (g.markers.past) g.markers.past.forEach(function (m) { html += '<span class="g-marker past">' + esc(m) + '</span>'; });
+        if (g.markers.present) g.markers.present.forEach(function (m) { html += '<span class="g-marker present">' + esc(m) + '</span>'; });
+        if (g.markers.future) g.markers.future.forEach(function (m) { html += '<span class="g-marker future">' + esc(m) + '</span>'; });
+        html += '</div>';
+      }
+
+      // 5. Vocabulary
+      if (g.vocab && g.vocab.length) {
+        html += '<div class="g-h2">Словарь урока</div>';
+        html += '<div class="g-vocab-grid">';
+        g.vocab.forEach(function (v) {
+          html += '<div class="g-vocab-item" data-say="' + esc(v.en) + '"><span class="en">' + esc(v.en) + '</span><span class="ru">' + esc(v.ru) + '</span></div>';
+        });
+        html += '</div>';
+      }
+      
+      // 6. Dialogs
+      if (g.dialogs && g.dialogs.length) {
+        html += '<div class="g-h2">Мини-диалоги</div>';
+        g.dialogs.forEach(function (d) {
+          html += '<div class="g-dialog-box"><strong style="text-align: center; font-size: 13px; color: var(--ink2); display: block; margin-bottom: 6px;">' + esc(d.title) + '</strong>';
+          d.lines.forEach(function (line) {
+            var spkClass = (line.speaker === 'A' || line.speaker === 'А') ? 'speaker-A' : 'speaker-B';
+            html += '<div class="g-dialog-line ' + spkClass + '" data-say="' + esc(line.en) + '">' +
+              '<span style="font-weight: 700; font-size: 14.5px;">' + esc(line.en) + '</span>' +
+              '<span class="ru">' + esc(line.ru) + '</span>' +
+              '</div>';
+          });
+          html += '</div>';
+        });
+      }
+
+      // 7. Examples
+      if (g.examples && g.examples.length) {
+        html += '<div class="g-h2">Примеры предложений</div>';
+        g.examples.forEach(function (p) {
+          html += phraseCard(p);
+        });
+      }
+      
+      // 8. Drills (build + transform + bridge)
+      var allDrills = [];
+      // Bridge repetition from previous lesson
+      if (id > 1) {
+        var prevG = (window.GRAMMAR || []).filter(function (x) { return x.id === (id - 1); })[0];
+        if (prevG && !prevG.isPlaceholder) {
+          var candidates = [];
+          if (prevG.drills) prevG.drills.forEach(function (d) {
+            var copy = {};
+            for (var k in d) { copy[k] = d[k]; }
+            copy._type = 'build';
+            copy.isBridge = true;
+            copy.bridgeFrom = prevG.title_ru;
+            candidates.push(copy);
+          });
+          if (prevG.transforms) prevG.transforms.forEach(function (d) {
+            var copy = {};
+            for (var k in d) { copy[k] = d[k]; }
+            copy._type = 'transform';
+            copy.isBridge = true;
+            copy.bridgeFrom = prevG.title_ru;
+            candidates.push(copy);
+          });
+          if (candidates.length > 0) {
+            var randDrill = candidates[Math.floor(Math.random() * candidates.length)];
+            allDrills.push(randDrill);
+          }
+        }
+      }
+
+      if (g.drills) g.drills.forEach(function (d) { d._type = 'build'; allDrills.push(d); });
+      if (g.transforms) g.transforms.forEach(function (d) { d._type = 'transform'; allDrills.push(d); });
+      if (allDrills.length) {
+        html += '<div class="g-h2">Практика</div>';
+        html += '<div id="g-drill-container"></div>';
+      }
+      
+      app.innerHTML = html;
+      
+      if (allDrills.length) {
+        initDrills(allDrills);
+      }
+    }
+
+    function initDrills(drills) {
+      currentDrillErrors = 0;
+      // Separate bridge drills (must be first) and shuffle normal drills
+      var bridges = drills.filter(function (d) { return d.isBridge; });
+      var normal = drills.filter(function (d) { return !d.isBridge; });
+      for (var si = normal.length - 1; si > 0; si--) {
+        var sj = Math.floor(Math.random() * (si + 1));
+        var tmp = normal[si]; normal[si] = normal[sj]; normal[sj] = tmp;
+      }
+      currentDrills = bridges.concat(normal);
+      currentDrillPos = 0;
+      drillChecked = false;
+      drawDrill();
+    }
+    
+    function drawDrill() {
+      var container = document.getElementById("g-drill-container");
+      if (!container) return;
+      
+      if (currentDrillPos >= currentDrills.length) {
+        setGrammarCompleted(curGrammarLesson, true);
+        var restartBtn = '<button class="bigbtn b-again" style="margin-top:10px; width:100%;" id="g-btn-restart">🔄 Пройти ещё раз</button>';
+        if (currentDrillErrors === 0) {
+          container.innerHTML = '<div class="flash ok" style="min-height:auto; background:#e4efe8; border-color:#2f6f4f; padding:20px">' +
+            '<div style="font-size:24px; color:var(--accent); font-weight:700">🎉 Идеально!</div>' +
+            '<div style="font-size:14px; margin-top:8px; color:var(--ink)">Урок пройден без ошибок! Великолепный результат.</div>' +
+            '<button class="bigbtn b-show" style="margin-top:16px; width:100%;" id="g-btn-finish">Отлично</button>' +
+            restartBtn +
+            '</div>';
+        } else {
+          container.innerHTML = '<div class="flash ok" style="min-height:auto; background:var(--accent-soft); border-color:var(--accent); padding:20px">' +
+            '<div style="font-size:24px; color:var(--accent); font-weight:700">🎉 Урок пройден!</div>' +
+            '<div style="font-size:14px; margin-top:8px; color:var(--ink)">Вы выполнили задания. Ошибок сделано: <b>' + currentDrillErrors + '</b>.</div>' +
+            '<button class="bigbtn b-show" style="margin-top:16px; width:100%;" id="g-btn-finish">Отлично</button>' +
+            restartBtn +
+            '</div>';
+        }
+        return;
+      }
+      
+      var drill = currentDrills[currentDrillPos];
+      currentAnswer = [];
+      drillChecked = false;
+      
+      // Progress dots
+      var dots = '<div class="g-progress">';
+      for (var di = 0; di < currentDrills.length; di++) {
+        var cls = di < currentDrillPos ? 'done' : (di === currentDrillPos ? 'active' : '');
+        dots += '<div class="g-progress-dot ' + cls + '"></div>';
+      }
+      dots += '</div>';
+      
+      if (drill._type === 'transform') {
+        drawTransformDrill(container, drill, dots);
+        return;
+      }
+      
+      // Build drill (original type)
+      var html = dots + '<div class="g-drill-box">' +
+        '<div class="g-drill-type">' + esc(drill.isBridge ? '🔗 Повторение: ' + drill.bridgeFrom : '✍️ Собери фразу') + '</div>' +
+        '<div style="font-size:12px; color:var(--ink2)">Задание ' + (currentDrillPos + 1) + ' из ' + currentDrills.length + '</div>' +
+        '<div class="g-drill-ru">' + esc(drill.ru) + '</div>' +
+        '<div class="g-slots-zone" id="g-slots"></div>' +
+        '<div class="g-chips-zone" id="g-chips">';
+      
+      drill.options.forEach(function (opt, idx) {
+        html += '<button class="g-chip" data-chip-idx="' + idx + '">' + esc(opt) + '</button>';
+      });
+      
+      html += '</div>' +
+        '<div class="g-drill-feedback" id="g-feedback"></div>' +
+        '<div class="g-explain" id="g-explain"></div>' +
+        '<div class="g-drill-action">' +
+          '<button class="bigbtn b-show" id="g-btn-check" style="max-width:200px">Проверить</button>' +
+        '</div>' +
+        '</div>';
+      
+      container.innerHTML = html;
+    }
+    
+    function drawTransformDrill(container, drill, dots) {
+      var shuffled = drill.options.slice();
+      for (var si = shuffled.length - 1; si > 0; si--) {
+        var sj = Math.floor(Math.random() * (si + 1));
+        var tmp = shuffled[si]; shuffled[si] = shuffled[sj]; shuffled[sj] = tmp;
+      }
+      
+      var html = dots + '<div class="g-drill-box">' +
+        '<div class="g-drill-type">' + esc(drill.isBridge ? '🔗 Повторение: ' + drill.bridgeFrom : '🔄 Трансформация') + '</div>' +
+        '<div style="font-size:12px; color:var(--ink2)">Задание ' + (currentDrillPos + 1) + ' из ' + currentDrills.length + '</div>' +
+        '<div class="g-transform-source">' + esc(drill.source) + '</div>' +
+        '<div class="g-transform-task">' + esc(drill.task) + '</div>' +
+        '<div class="g-transform-options">';
+      shuffled.forEach(function (opt, idx) {
+        html += '<button class="g-transform-opt" data-transform-idx="' + idx + '" data-transform-val="' + esc(opt) + '">' + esc(opt) + '</button>';
+      });
+      html += '</div>' +
+        '<div class="g-drill-feedback" id="g-feedback"></div>' +
+        '<div class="g-explain" id="g-explain"></div>' +
+        '</div>';
+      container.innerHTML = html;
+    }
+    
+    function handleTransformPick(val) {
+      if (drillChecked) return;
+      drillChecked = true;
+      var drill = currentDrills[currentDrillPos];
+      var feedback = document.getElementById("g-feedback");
+      var explain = document.getElementById("g-explain");
+      var allBtns = document.querySelectorAll(".g-transform-opt");
+      
+      if (val === drill.answer) {
+        feedback.textContent = "🎉 Правильно!";
+        feedback.className = "g-drill-feedback ok";
+        vibrate(15);
+        speak(drill.answer.replace(/[?.!,]/g, ""));
+        allBtns.forEach(function (b) {
+          if (b.getAttribute("data-transform-val") === val) b.classList.add("correct-pick");
+          else b.classList.add("dim");
+        });
+      } else {
+        currentDrillErrors++;
+        feedback.textContent = "❌ Неправильно";
+        feedback.className = "g-drill-feedback err";
+        vibrate([30, 40]);
+        allBtns.forEach(function (b) {
+          var bv = b.getAttribute("data-transform-val");
+          if (bv === val) b.classList.add("wrong-pick");
+          else if (bv === drill.answer) b.classList.add("correct-pick");
+          else b.classList.add("dim");
+        });
+        if (explain && drill.hint) {
+          explain.innerHTML = '<div class="correct">✅ Правильный ответ: ' + esc(drill.answer) + '</div>' +
+            '<div class="hint">💡 ' + esc(drill.hint) + '</div>';
+          explain.style.display = 'block';
+        }
+      }
+      setTimeout(function () {
+        currentDrillPos++;
+        drawDrill();
+      }, drill.answer === val ? 1500 : 2500);
+    }
+ 
+    function addWordToAnswer(word, optionIdx) {
+      if (drillChecked) return;
+      currentAnswer.push({ word: word, idx: optionIdx });
+      updateSlots();
+      var btn = document.querySelector('[data-chip-idx="' + optionIdx + '"]');
+      if (btn) btn.classList.add("used");
+    }
+    
+    function removeWordFromAnswer(answerIdx) {
+      if (drillChecked) return;
+      var item = currentAnswer[answerIdx];
+      currentAnswer.splice(answerIdx, 1);
+      updateSlots();
+      var btn = document.querySelector('[data-chip-idx="' + item.idx + '"]');
+      if (btn) btn.classList.remove("used");
+    }
+    
+    function updateSlots() {
+      var slots = document.getElementById("g-slots");
+      if (!slots) return;
+      var html = "";
+      currentAnswer.forEach(function (item, idx) {
+        html += '<button class="g-chip active-slot" data-slot-idx="' + idx + '">' + esc(item.word) + '</button>';
+      });
+      slots.innerHTML = html;
+    }
+ 
+    function checkDrill() {
+      var feedback = document.getElementById("g-feedback");
+      var btn = document.getElementById("g-btn-check");
+      var explain = document.getElementById("g-explain");
+      if (!feedback || !btn) return;
+      
+      if (drillChecked) {
+        currentDrillPos++;
+        drawDrill();
+        return;
+      }
+      
+      var drill = currentDrills[currentDrillPos];
+      var userWords = currentAnswer.map(function (x) { return x.word; });
+      var isCorrect = (userWords.length === drill.build.length);
+      if (isCorrect) {
+        for (var i = 0; i < drill.build.length; i++) {
+          if (userWords[i] !== drill.build[i]) {
+            isCorrect = false;
+            break;
+          }
+        }
+      }
+      
+      if (isCorrect) {
+        feedback.textContent = "🎉 Правильно!";
+        feedback.className = "g-drill-feedback ok";
+        vibrate(15);
+        var fullText = drill.build.join(" ").replace(/[?.!,]/g, "");
+        speak(fullText);
+        
+        btn.textContent = "Продолжить";
+        btn.className = "bigbtn b-show";
+        drillChecked = true;
+      } else {
+        currentDrillErrors++;
+        feedback.textContent = "❌ Неправильно";
+        feedback.className = "g-drill-feedback err";
+        vibrate([30, 40]);
+        if (explain) {
+          var correctStr = drill.build.join(' ');
+          var hintText = drill.hint || '';
+          explain.innerHTML = '<div class="correct">✅ Правильный ответ: ' + esc(correctStr) + '</div>' +
+            (hintText ? '<div class="hint">💡 ' + esc(hintText) + '</div>' : '');
+          explain.style.display = 'block';
+        }
+        var slots = document.getElementById("g-slots");
+        if (slots) {
+          slots.style.animation = "none";
+          setTimeout(function () { slots.style.animation = "shake 0.3s"; }, 10);
+        }
+        btn.textContent = "Попробовать ещё раз";
+        btn.className = "bigbtn b-again";
+        drillChecked = true;
+        btn.onclick = function () {
+          btn.onclick = null;
+          drillChecked = false;
+          currentAnswer = [];
+          drawDrill();
+        };
+      }
+    }
+
+    // ---- tabs / routing ----
+    function setTab(t) {
+      document.querySelectorAll(".tab").forEach(function (b) {
+        b.classList.toggle("active", b.getAttribute("data-tab") === t); });
+      vibrate(10);
+      if (t === "review") renderReview();
+      else if (t === "grammar") renderGrammar();
+      else renderHub();
+      window.scrollTo(0, 0);
+    }
+
+    document.addEventListener("click", function (e) {
+      var say = e.target.closest("[data-say]"); if (say) { speak(say.getAttribute("data-say")); return; }
+      var st = e.target.closest("[data-star]");
+      if (st) { var en = st.getAttribute("data-star"); toggleStar(en);
+        st.classList.toggle("on", isStarred(en)); return; }
+      
+      // Fullscreen stranger mode trigger on English phrase tap
+      var enText = e.target.closest(".phrase .en");
+      if (enText && !e.target.closest("button")) {
+        var phraseEl = enText.closest(".phrase");
+        if (phraseEl) {
+          var ru = phraseEl.querySelector(".ru").textContent;
+          var tr = phraseEl.querySelector(".tr").textContent.replace("[", "").replace("]", "");
+          showFullscreen(enText.textContent, tr, ru);
+          return;
+        }
+      }
+      
+      // Fullscreen overlay actions
+      if (e.target.closest("#fsClose") || e.target.id === "fsOverlay") { closeFullscreen(); return; }
+      if (e.target.closest("#fsSpeak")) { speak(fsActiveText); return; }
+      
+      // Settings panel toggles
+      if (e.target.closest("#btnSettings")) {
+        var panel = document.getElementById("settingsPanel");
+        if (panel) panel.classList.toggle("open");
+        return;
+      }
+      if (e.target.closest("#btnInstallPwa")) { installPwa(); return; }
+      if (e.target.closest("#btnExport")) { exportData(); return; }
+      if (e.target.closest("#btnImport")) {
+        var fileIn = document.getElementById("importFile");
+        if (fileIn) fileIn.click();
+        return;
+      }
+      if (e.target.closest("#btnResetAll")) { resetAllData(); return; }
+      if (e.target.closest("#btnSos")) { renderSos(); window.scrollTo(0, 0); return; }
+      
+      // Drill restart action
+      if (e.target.closest("#g-btn-restart")) {
+        var g = (window.GRAMMAR || []).filter(function (x) { return x.id === curGrammarLesson; })[0];
+        if (g) {
+          var allDrills = [];
+          if (curGrammarLesson > 1) {
+            var prevG = (window.GRAMMAR || []).filter(function (x) { return x.id === (curGrammarLesson - 1); })[0];
+            if (prevG && !prevG.isPlaceholder) {
+              var candidates = [];
+              if (prevG.drills) prevG.drills.forEach(function (d) {
+                var copy = {}; for (var k in d) { copy[k] = d[k]; }
+                copy._type = 'build'; copy.isBridge = true; copy.bridgeFrom = prevG.title_ru;
+                candidates.push(copy);
+              });
+              if (prevG.transforms) prevG.transforms.forEach(function (d) {
+                var copy = {}; for (var k in d) { copy[k] = d[k]; }
+                copy._type = 'transform'; copy.isBridge = true; copy.bridgeFrom = prevG.title_ru;
+                candidates.push(copy);
+              });
+              if (candidates.length > 0) {
+                var randDrill = candidates[Math.floor(Math.random() * candidates.length)];
+                allDrills.push(randDrill);
+              }
+            }
+          }
+          if (g.drills) g.drills.forEach(function (d) { d._type = 'build'; allDrills.push(d); });
+          if (g.transforms) g.transforms.forEach(function (d) { d._type = 'transform'; allDrills.push(d); });
+          initDrills(allDrills);
+        }
+        return;
+      }
+
+      // back button behavior
+      var back = e.target.closest(".back");
+      if (back) {
+        if (back.getAttribute("data-back-to") === "grammar") renderGrammar();
+        else renderHub();
+        window.scrollTo(0, 0);
+        return;
+      }
+      
+      var cat = e.target.closest("[data-cat]"); if (cat) { renderCat(cat.getAttribute("data-cat")); window.scrollTo(0, 0); return; }
+      if (e.target.closest("[data-tab]")) { setTab(e.target.closest("[data-tab]").getAttribute("data-tab")); return; }
+      
+      // grammar-specific events (cross-link tags + lesson list items)
+      var gLink = e.target.closest(".grammar-link[data-grammar-id]");
+      if (gLink) {
+        var linkId = parseInt(gLink.getAttribute("data-grammar-id"), 10);
+        setTab("grammar");
+        renderGrammarLesson(linkId);
+        window.scrollTo(0, 0);
+        return;
+      }
+      var gItem = e.target.closest("[data-grammar-id]");
+      if (gItem) {
+        var id = parseInt(gItem.getAttribute("data-grammar-id"), 10);
+        renderGrammarLesson(id);
+        window.scrollTo(0, 0);
+        return;
+      }
+      var chip = e.target.closest("[data-chip-idx]");
+      if (chip) {
+        addWordToAnswer(chip.textContent, parseInt(chip.getAttribute("data-chip-idx"), 10));
+        return;
+      }
+      var slot = e.target.closest("[data-slot-idx]");
+      if (slot) {
+        removeWordFromAnswer(parseInt(slot.getAttribute("data-slot-idx"), 10));
+        return;
+      }
+      var topt = e.target.closest("[data-transform-idx]");
+      if (topt) {
+        handleTransformPick(topt.getAttribute("data-transform-val"));
+        return;
+      }
+      if (e.target.closest("#g-btn-check")) { checkDrill(); return; }
+      if (e.target.closest("#g-btn-finish")) { renderGrammar(); window.scrollTo(0, 0); return; }
+      
+      if (e.target.closest("#showBtn")) { reveal(); return; }
+      if (e.target.closest("#knowBtn")) { nextCard(true); return; }
+      if (e.target.closest("#againBtn")) { nextCard(false); return; }
+    });
+
+    // Change listeners for select theme and file import
+    document.addEventListener("change", function (e) {
+      if (e.target.id === "themeSelect") {
+        settings.theme = e.target.value;
+        saveSettings();
+        applyTheme(settings.theme);
+      }
+      if (e.target.id === "importFile") {
+        if (e.target.files && e.target.files[0]) {
+          importData(e.target.files[0]);
+        }
+      }
+    });
+
+    // PWA Service Worker Registration + Install Prompt
+    var pwaInstallPrompt = null;
+    window.addEventListener("beforeinstallprompt", function (e) {
+      e.preventDefault();
+      pwaInstallPrompt = e;
+      // If settings panel is visible, re-render to show install button
+      var existing = document.getElementById("btnInstallPwa");
+      if (!existing && view === "hub") renderHub();
+    });
+    function installPwa() {
+      if (!pwaInstallPrompt) return;
+      pwaInstallPrompt.prompt();
+      pwaInstallPrompt.userChoice.then(function (result) {
+        if (result.outcome === "accepted") {
+          pwaInstallPrompt = null;
+          var btn = document.getElementById("btnInstallPwa");
+          if (btn) btn.closest(".settings-row").remove();
+        }
+      });
+    }
+    window.addEventListener("appinstalled", function () {
+      pwaInstallPrompt = null;
+    });
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (err) {
+          console.warn("SW registration failed: ", err);
+        });
+      });
+    }
+
+    // init
+    loadSettings();
+    refreshBadge();
+    var start = location.hash.replace("#", "");
+    if (start === "review") { setTab("review"); }
+    else if (start === "grammar") { setTab("grammar"); }
+    else if (start.indexOf("grammar-") === 0) {
+      setTab("grammar");
+      var gId = parseInt(start.replace("grammar-", ""), 10);
+      if (gId) renderGrammarLesson(gId);
+    }
+    else { document.querySelector('.tab[data-tab="book"]').classList.add("active");
+      if (start && PB.some(function (c) { return c.id === start; })) renderCat(start); else renderHub(); }
+  </script>
+</body>
+</html>

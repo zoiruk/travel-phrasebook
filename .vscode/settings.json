@@ -1,0 +1,4 @@
+{
+    "terminal.integrated.suggest.runOnEnter": "always",
+    "terminal.integrated.focusAfterRun": "none"
+}

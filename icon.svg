@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2f6f4f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1b432f;stop-opacity:1" />
+    </linearGradient>
+    <clipPath id="clipBubble">
+      <rect x="136" y="136" width="240" height="240" rx="120" />
+    </clipPath>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#grad)"/>
+  
+  <!-- Outer bubble shadow/outline -->
+  <rect x="131" y="131" width="250" height="250" rx="125" fill="#ffffff" opacity="0.15" />
+  
+  <!-- Tail of the speech bubble -->
+  <path d="M220 360 L180 420 L270 378 Z" fill="#ffffff" />
+  
+  <!-- Main white circle of the bubble -->
+  <rect x="136" y="136" width="240" height="240" rx="120" fill="#ffffff" />
+  
+  <!-- Union Jack inside clip path -->
+  <g clip-path="url(#clipBubble)">
+    <!-- Blue base -->
+    <rect x="136" y="136" width="240" height="240" fill="#012169" />
+    
+    <!-- White diagonals -->
+    <line x1="136" y1="136" x2="376" y2="376" stroke="#ffffff" stroke-width="26" />
+    <line x1="136" y1="376" x2="376" y2="136" stroke="#ffffff" stroke-width="26" />
+    
+    <!-- Red diagonals (St Patrick's cross with proper pinwheel offset) -->
+    <!-- Pinwheel diagonal offset lines -->
+    <path d="M136 136 L256 256 M376 376 L256 256 M136 376 L256 256 M376 136 L256 256" stroke="#C8102E" stroke-width="10" stroke-linecap="butt" />
+    
+    <!-- White cross (St George) -->
+    <rect x="236" y="136" width="40" height="240" fill="#ffffff" />
+    <rect x="136" y="236" width="240" height="40" fill="#ffffff" />
+    
+    <!-- Red cross (St George) -->
+    <rect x="244" y="136" width="24" height="240" fill="#C8102E" />
+    <rect x="136" y="244" width="240" height="24" fill="#C8102E" />
+  </g>
+</svg>
